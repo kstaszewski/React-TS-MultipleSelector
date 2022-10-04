@@ -1,5 +1,5 @@
 import './App.css';
-import Select from './component/Select/Select';
+import Select, { SelectOption } from './component/Select/Select';
 import { useState } from 'react';
 
 const options = [
@@ -12,11 +12,14 @@ const options = [
 
 function App() {
 
-  const [value, setValue] = useState<{ label: string, value: string | number, } | undefined>(options[0]);
+  const [valueSingle, setValueSingle] = useState<SelectOption | undefined>(options[0]);
+  const [valueMultiple, setValueMultiple] = useState<SelectOption[]>([options[0]]);
 
   return (
     <>
-      <Select options={options} value={value} onChange={(option) => setValue(option)} />
+      <Select options={options} value={valueSingle} onChange={(option) => setValueSingle(option)} />
+      <br />
+      <Select multiple options={options} value={valueMultiple} onChange={(option) => setValueMultiple(option)} />
     </>
   );
 }
